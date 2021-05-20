@@ -6,92 +6,79 @@ import java.io.IOException;
 
 public class InitialFiles {
     
+    public static File makeDir(String parent, String child) {
+        File newFile = new File(parent, child);
+        return newFile;
+    }
+
+    public static String dirLog (File file,  boolean  deleteOnExit) {
+        String s = ((file.mkdir()) ? "Directory was created: " + file.getAbsolutePath()
+                : "Directory creation error: " + file.getAbsolutePath() + "\n");
+        if (deleteOnExit) file.deleteOnExit();
+        return s;
+    }
+
+    public static String fileLog (File file,  boolean  deleteOnExit) {
+        String s = null;
+        try {
+            s = ((file.createNewFile()) ? "File was created: " + file.getAbsolutePath()
+                    : "File creation error: " + file.getAbsolutePath() + "\n");
+            file.deleteOnExit();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (deleteOnExit) file.deleteOnExit();
+        return s;
+    }
+
+
     public static void creationInitialFiles(){
         StringBuilder sb = new StringBuilder();
 
+
         File gameKost = new File("C://", "GameKost");
-        sb.append((gameKost.mkdir()) ? "Directory was created: " + gameKost.getAbsolutePath()
-                : "Directory creation error: " + gameKost.getAbsolutePath()).append("\n");
-        gameKost.deleteOnExit();
+        sb.append(dirLog(gameKost, true));
 
         File srs = new File(Main.GAME_PATH, "srs");
-        sb.append((srs.mkdir()) ? "Directory was created: " + srs.getAbsolutePath()
-                : "Directory creation error: " + srs.getAbsolutePath()).append("\n");
-        srs.deleteOnExit();
+        sb.append(dirLog(srs, true));
 
         File res = new File(Main.GAME_PATH, "res");
-        sb.append((res.mkdir()) ? "Directory was created: " + res.getAbsolutePath()
-                : "Directory creation error: " + res.getAbsolutePath()).append("\n");
-        res.deleteOnExit();
+        sb.append(dirLog(res, true));
 
         File drawables = new File(Main.GAME_PATH + "/res", "drawables");
-        sb.append((drawables.mkdir()) ? "Directory was created: " + drawables.getAbsolutePath()
-                : "Directory creation error: " + drawables.getAbsolutePath()).append("\n");
-        drawables.deleteOnExit();
+        sb.append(dirLog(drawables, true));
 
         File vectors = new File(Main.GAME_PATH + "/res", "vectors");
-        sb.append((vectors.mkdir()) ? "Directory was created: " + vectors.getAbsolutePath()
-                : "Directory creation error: " + vectors.getAbsolutePath()).append("\n");
-        vectors.deleteOnExit();
+        sb.append(dirLog(vectors, true));
 
         File icons = new File(Main.GAME_PATH + "/res", "icons");
-        sb.append((icons.mkdir()) ? "Directory was created: " + icons.getAbsolutePath()
-                : "Directory creation error: " + icons.getAbsolutePath()).append("\n");
-        icons.deleteOnExit();
+        sb.append(dirLog(icons, true));
 
         File savegames = new File(Main.GAME_PATH, "savegames");
-        sb.append((savegames.mkdir()) ? "Directory was created: " + savegames.getAbsolutePath()
-                : "Directory creation error: " + savegames.getAbsolutePath()).append("\n");
-        savegames.deleteOnExit();
+        sb.append(dirLog(savegames,true));
 
         File someDir = new File(Main.GAME_PATH, "savegames/someDir");
-        sb.append((someDir.mkdir()) ? "Directory was created: " + someDir.getAbsolutePath()
-                : "Directory creation error: " + someDir.getAbsolutePath()).append("\n");
-        someDir.deleteOnExit();
-
-
+        sb.append(dirLog(someDir, true));
 
         File temp = new File(Main.GAME_PATH, "temp");
-        sb.append((temp.mkdir()) ? "Directory was created: " + temp.getAbsolutePath()
-                : "Directory creation error: " + temp.getAbsolutePath()).append("\n");
-        temp.deleteOnExit();
+        sb.append(dirLog(temp, true));
 
         File tempExTxt = new File(Main.GAME_PATH + "/temp", "Temp.txt");
-        try {
-            sb.append((tempExTxt.createNewFile()) ? "File was created: " + tempExTxt.getAbsolutePath()
-                    : "File creation error: " + tempExTxt.getAbsolutePath()).append("\n");
-            tempExTxt.deleteOnExit();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        sb.append(fileLog(tempExTxt, true));
 
         File main = new File(Main.GAME_PATH + "/srs", "main");
-        sb.append((main.mkdir()) ? "Directory was created: " + main.getAbsolutePath()
-                : "Directory creation error: " + main.getAbsolutePath()).append("\n");
-        main.deleteOnExit();
+        sb.append(dirLog(main,true));
 
         File mainExJava = new File(Main.GAME_PATH + "/srs/main", "Main.java");
-        try {
-            sb.append((mainExJava.createNewFile()) ? "File was created: " + mainExJava.getAbsolutePath()
-                    : "File creation error: " + mainExJava.getAbsolutePath()).append("\n");
-            mainExJava.deleteOnExit();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        sb.append(fileLog(mainExJava,true));
 
         File utilsExJava = new File(Main.GAME_PATH + "/srs/main", "Utils.java");
-        try {
-            sb.append((utilsExJava.createNewFile()) ? "File was created: " + utilsExJava.getAbsolutePath()
-                    : "File creation error: " + utilsExJava.getAbsolutePath()).append("\n");
-            utilsExJava.deleteOnExit();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        sb.append(fileLog(utilsExJava,true));
+
+
 
         File test = new File(Main.GAME_PATH + "/srs", "test");
-        sb.append((test.mkdir()) ? "Directory was created: " + test.getAbsolutePath()
-                : "Directory creation error: " + test.getAbsolutePath()).append("\n");
-        test.deleteOnExit();
+        sb.append(dirLog(test,true));
 
         System.out.println(sb);
 

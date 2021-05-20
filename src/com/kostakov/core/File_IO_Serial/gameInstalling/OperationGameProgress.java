@@ -42,7 +42,7 @@ public class OperationGameProgress {
     public static void gpToZip(File[] files, String path) throws IOException {
 
         ZipOutputStream zout = new ZipOutputStream
-                (new FileOutputStream(path + "/GP.zip"));
+                (new FileOutputStream(path + "/gp.zip"));
         for (File f : files) {
             if (f.isDirectory()) {
                 System.out.println(f.getName() + " является директорией. Архивации не подлежит.");
@@ -86,8 +86,8 @@ public class OperationGameProgress {
         }
         zin.close();
 
-        File GP = new File(zipPath);
-        System.out.println("\tРезультат удаления файла GP.zip - " + GP.delete());
+        File gpZip = new File(zipPath);
+        System.out.println("\tРезультат удаления файла GP.zip - " + gpZip.delete());
 
         File[] openGP = new File("C:/GameKost/savegames").listFiles();
         for (File f : openGP) {
