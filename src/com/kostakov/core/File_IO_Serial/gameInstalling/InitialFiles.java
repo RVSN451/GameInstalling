@@ -5,20 +5,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class InitialFiles {
-    
-    public static File makeDir(String parent, String child) {
-        File newFile = new File(parent, child);
-        return newFile;
-    }
 
-    public static String dirLog (File file,  boolean  deleteOnExit) {
+    public static String dirLog(File file, boolean deleteOnExit) {
         String s = ((file.mkdir()) ? "Directory was created: " + file.getAbsolutePath()
                 : "Directory creation error: " + file.getAbsolutePath() + "\n");
         if (deleteOnExit) file.deleteOnExit();
         return s;
     }
 
-    public static String fileLog (File file,  boolean  deleteOnExit) {
+    public static String fileLog(File file, boolean deleteOnExit) {
         String s = null;
         try {
             s = ((file.createNewFile()) ? "File was created: " + file.getAbsolutePath()
@@ -32,7 +27,7 @@ public class InitialFiles {
     }
 
 
-    public static void creationInitialFiles(){
+    public static void creationInitialFiles() {
         StringBuilder sb = new StringBuilder();
 
 
@@ -55,7 +50,7 @@ public class InitialFiles {
         sb.append(dirLog(icons, true));
 
         File savegames = new File(Main.GAME_PATH, "savegames");
-        sb.append(dirLog(savegames,true));
+        sb.append(dirLog(savegames, true));
 
         File someDir = new File(Main.GAME_PATH, "savegames/someDir");
         sb.append(dirLog(someDir, true));
@@ -67,18 +62,17 @@ public class InitialFiles {
         sb.append(fileLog(tempExTxt, true));
 
         File main = new File(Main.GAME_PATH + "/srs", "main");
-        sb.append(dirLog(main,true));
+        sb.append(dirLog(main, true));
 
         File mainExJava = new File(Main.GAME_PATH + "/srs/main", "Main.java");
-        sb.append(fileLog(mainExJava,true));
+        sb.append(fileLog(mainExJava, true));
 
         File utilsExJava = new File(Main.GAME_PATH + "/srs/main", "Utils.java");
-        sb.append(fileLog(utilsExJava,true));
-
+        sb.append(fileLog(utilsExJava, true));
 
 
         File test = new File(Main.GAME_PATH + "/srs", "test");
-        sb.append(dirLog(test,true));
+        sb.append(dirLog(test, true));
 
         System.out.println(sb);
 
